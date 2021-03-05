@@ -57,6 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
           SizedBox(height: 20.0,),
           DestinationWidget(),
+          SizedBox(height: 20.0,),
+          HotelWidget(),
         ],
       )),
     );
