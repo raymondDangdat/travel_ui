@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:travel_ui/colors/colors.dart';
+import '../colors/colors.dart';
+import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  int _currentTab = 0;
 
 
   List<IconData> _icons = [
@@ -40,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: ListView(
+      body: SafeArea(
+          child: ListView(
         padding: EdgeInsets.symmetric(vertical: 30.0),
         children: [
           Padding(
@@ -52,8 +55,28 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _icons.asMap().entries.map((MapEntry map) => _buildIcons(map.key)).toList(),
           ),
+
+
+          SizedBox(height: 20.0,),
+          DestinationWidget(),
+          SizedBox(height: 20.0,),
+          HotelWidget(),
         ],
-      )),
+      )
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentTab,
+        onTap: (int value){
+          setState(() {
+            _currentTab = value;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.search, size: 30.0,), title: SizedBox.shrink()),
+          BottomNavigationBarItem(icon: Icon(Icons.local_pizza, size: 30.0,), title: SizedBox.shrink()),
+          BottomNavigationBarItem(icon: CircleAvatar(radius: 15.0, backgroundColor: primaryColor,), title: SizedBox.shrink()),
+        ],
+      ),
     );
   }
 }
